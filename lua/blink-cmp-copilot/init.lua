@@ -20,11 +20,7 @@ function M.get_trigger_characters()
 end
 
 function M:enabled()
-  local success, creds = pcall(function()
-    return require("copilot.auth").get_creds()
-  end)
-  
-  if not success or not creds or vim.tbl_isempty(creds) then
+  if not require("copilot.auth").is_authenticated() then
     return false
   end
   
